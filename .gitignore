@@ -222,3 +222,6 @@ __marimo__/
 # Besoins perso
 data/
 src/Experiments.py
+
+# Model checkpoints and training history
+checkpoints/
