@@ -159,9 +159,14 @@ def check_split(df: pd.DataFrame) -> None:
     splits_per_group = df.groupby("group")["split"].nunique()
     assert (splits_per_group == 1).all(), "Some groups appear in several splits"
 
-    stats = df.groupby("split").agg(n=("question", "size"), multi_share=("multi_table", "mean"))
+    stats = df.groupby("split").agg(
+        n=("question", "size"), multi_share=("multi_table", "mean")
+    )
     stats["share"] = stats["n"] / len(df)
-    print(stats.loc[["train", "val", "test"], ["n", "share", "multi_share"]].round(4), end="\n\n")
+    print(
+        stats.loc[["train", "val", "test"], ["n", "share", "multi_share"]].round(4),
+        end="\n\n",
+    )
 
 
 def save_splits(df: pd.DataFrame, out_dir: Path) -> None:
